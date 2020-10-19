@@ -18,23 +18,21 @@ pyg.confirm('프로그램을 실행합니다.')
 abs_path=r'D:\\NaverCloud\\화랑\\매출(자문).xlsm'
 read_df1=pd.read_excel(abs_path, sheet_name='2020 New', skiprows=6)
 df=pd.DataFrame(read_df1)
-read_df2=df.iloc[:,[0,1,3,4]]                                      # 1차 가공) 일부 데이터만 사용하기
+read_df2=df.iloc[:,[0,1,3,4,12]]                                      # 1차 가공) 일부 데이터만 사용하기
 df2=pd.DataFrame(read_df2)                                                  # 가공데이터 DF로 배정하기 (자동완선기능 사용)
-df2.set_index('구분', inplace=True)
-df2.dropna(thresh=2, inplace=True)
-df2.계약유지.fillna('대상사업장',inplace=True)
-final_df=df2[df2.계약유지=='대상사업장']
-final_df.사업장관리번호 = final_df.사업장관리번호.apply(lambda x: int(x))       # 4차 가공) 사업자관리번호의 데이터를 int로 변환
-a=final_df.사업장관리번호.tolist()
-
+df2_1=df2[df2['계약유지']!='해지']
+df2_2=df2_1[df2_1['급여지급일']!='법률자문']
+df3=df2_2.dropna(thresh=3)
+df3.set_index('구분', inplace=True)
+df3.sort_values(by='사업장명',ascending=True, inplace=True)
+df3.사업장관리번호=df3.사업장관리번호.apply(lambda x: int(x))
+a=df3.사업장관리번호.tolist()
 
 # 셀레니움
 url = 'https://edi.nhis.or.kr'
 driver = webdriver.Chrome()
 driver.get(url)
 driver.maximize_window()
-
-
 time.sleep(20)
 
 #로그인
