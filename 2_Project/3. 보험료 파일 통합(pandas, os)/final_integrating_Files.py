@@ -1,27 +1,26 @@
 import os
 import pandas as pd
+import re
 
 yyyymm=input('yyyymm을 입력하시오 : ')
 
 def id(value):
     return value.성명[0]+value.주민등록번호[0:6]
 
-path='./'
-file_list=os.listdir(path)
-object_list=[]
-suffix = ' (종합).xlsx'
-for i in file_list:
-    try:
-        item=i.split()
-        name=item[item.index(yyyymm)+1]
-        if name not in object_list:
-            object_list.append(name)
 
-        else:
-            pass
+path = '.'
+surfix = ' (종합).xlsx'
+cp1 = re.compile('.+[.]x+')
+cp2 = re.compile(surfix)
+object_list=[] 
+for i in os.listdir(path):
+    if i.startswith(yyyymm) and cp1.match(i):
+        j = os.path.splitext(i)[0]
+        k=j[7:len(j)-3]
 
-    except:
-        pass
+        if k not in object_list:
+            object_list.append(k)
+
 
 
 # 건강보험료와 연금보험료 파일을 하나로 연결
@@ -29,11 +28,11 @@ for name in object_list:
     try:
         #표준파일 생성
         standard_name=yyyymm+' '+name
-        standard=pd.ExcelWriter(standard_name+suffix, engine='xlsxwriter')
+        standard=pd.ExcelWriter(standard_name+surfix, engine='xlsxwriter')
         
         #건강보험 작업
         filename=standard_name+' 건강.xls'
-        if os.path.isfile(path+filename):
+        if os.path.isfile(filename):
             n4=pd.read_excel(filename, sheet_name=0)
             n2=n4
             n2['id']=n2.apply(id, axis=1)
@@ -46,7 +45,7 @@ for name in object_list:
 
         #연금보험 작업
         filename1=standard_name+' 연금.xls'
-        if os.path.isfile(path+filename1):
+        if os.path.isfile(filename1):
             n5=pd.read_excel(filename1, sheet_name=0)
             n3=n5        
             n3['id']=n3.apply(id, axis=1)
