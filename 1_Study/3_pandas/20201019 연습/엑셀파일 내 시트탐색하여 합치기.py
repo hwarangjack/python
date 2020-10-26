@@ -15,21 +15,28 @@ for i in file_list:
         j=os.path.join(os.getcwd(),i)
         target_list.append(j)
 
-standard_df=pd.DataFrame({
-    '예시':[1,2,3],
-    '예시1':[1,2,3],
-    '예시2':[1,2,3]
-})
 
-for i in target_list[0:3]:
-    for j in range(1,9):
-        df=pd.read_excel(i, sheet_name=f'20200{j}', skiprows=16)
-        pd.DataFrame(df)
-        df.dropna(thresh=40, inplace=True)
-        standard_df=standard_df.append(df)
-        standard_df=standard_df[standard_df['주민등록번호']!='NaN']
-        standard_df.주민등록번호=standard_df.dropna()
+standard = pd.DataFrame([])
 
-standard_df.drop(['예시','예시1','예시2'],axis=1, inplace=True)   
-print(standard_df.shape)
-            
+for i in target_list:
+    for k in list(map(str,range(202001,202012))):
+        try:
+            df_ = pd.read_excel(i, sheet_name=k)
+            df_name=df_.iloc[11,0]
+            df_month=df_.iloc[9,9]
+            df = pd.read_excel(i, sheet_name=k, skiprows=16)
+            df.insert(0,'사업장명',df_name)
+            df.insert(1,'임금대장',df_month)
+            df.set_index('구분', inplace=True)
+            df.dropna(how='all',subset=['주민등록번호','성명'], inplace=True)
+            standard = standard.append(df)
+            print(standard)
+        except:
+            print('실패')
+            pass
+
+
+
+standard.sort_values(by='주민등록번호',ascending=True, inplace=True)
+standard.to_excel('practice.xlsx')
+
