@@ -1,15 +1,51 @@
 import pandas as pd
+import os
 
 
-#공통데이터에서 자료 추출하기
-abs_path=r'D:\\NaverCloud\\화랑\\매출(자문).xlsm'
-read_df1=pd.read_excel(abs_path, sheet_name='2020 New', skiprows=6)
-df=pd.DataFrame(read_df1)
-read_df2=df.iloc[:,[0,1,3,4]]                                      # 1차 가공) 일부 데이터만 사용하기
-df2=pd.DataFrame(read_df2)                                                  # 가공데이터 DF로 배정하기 (자동완선기능 사용)
-df2.set_index('구분', inplace=True)
-df2.dropna(thresh=2, inplace=True)
-df2.계약유지.fillna('대상사업장',inplace=True)
-final_df=df2[df2.계약유지=='대상사업장']
-final_df.사업장관리번호 = final_df.사업장관리번호.apply(lambda x: int(x))       # 4차 가공) 사업자관리번호의 데이터를 int로 변환
-print(final_df)
+
+#연습 데이터프레임 불러오기
+df=pd.read_excel('D:\\NaverCloud\\화랑\\학습방\\python\\practice.xlsx')
+pd.DataFrame(df)
+df.sort_values(by=['사업장명', '주민등록번호'], ascending=True, inplace = True)
+df.set_index('사업장명', inplace=True)
+
+#데이터 중 분석에 불필요한 행(Row)을 명칭(Label)으로 삭제하기
+# df.drop(['119-96-01081'], axis=0, inplace=True)
+# print(df.head(20))
+# print(df.shape)
+
+#데이터 중 분석에 불필요한 행(Row) 위치(Index)로 삭제하기
+# df.drop(df.index[0], axis=0, inplace=True)
+# print(df.head(20))
+# print(df.shape)
+
+#데이터 중 분석에 불필요한 열(columns)을 명칭(Label)으로 삭제하기
+# df.drop(['구분','생년월일'], axis=1, inplace=True)
+# print(df)
+
+#데이터 중 분석에 불필요한 열(columns) 위치(Index)로 삭제하기
+# df.drop(df.columns[[0,4,5,6,7,8,9,11,12,13,17,18,19,21]], axis=1, inplace=True)
+# print(df)
+
+#데이터 유형 변경 1 (숫자로 변환하기 - df.columns.astype())
+# df.주민등록번호 = df.주민등록번호.astype(str)
+# print(df.head(15))
+# print(df.dtypes)
+
+#데이터 유형 변경 2 (숫자로 변환하기 - pd.to_numeric)
+# pd.to_numeric(df.주민등록번호, errors='coerce', downcast=None)
+# print(df.head(15))
+# print(df.dtypes)
+
+#데이터 유형 변경 3 (문자열 다루기)
+# df.주민등록번호 = df.주민등록번호.apply(str)
+# df.주민등록번호 = df.주민등록번호.apply(lambda x: str(x[0:6])+'-'+str(x[6:]))
+# print(df.head(15))
+# print(df.dtypes)
+# print(df.info())
+
+#데이터 유형 변경 4 (카테고리로 변환)
+# df.임금대장 = df.임금대장.astype('category')
+# print(df.head(15))
+# print(df.dtypes)
+# print(df.info())
