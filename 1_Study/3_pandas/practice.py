@@ -1,5 +1,6 @@
 import pandas as pd
 import os
+import re
 
 
 
@@ -24,7 +25,10 @@ df.set_index('사업장명', inplace=True)
 # print(df)
 
 #데이터 중 분석에 불필요한 열(columns) 위치(Index)로 삭제하기
-# df.drop(df.columns[[0,4,5,6,7,8,9,11,12,13,17,18,19,21]], axis=1, inplace=True)
+# df.drop(df.columns[0:6], axis=1, inplace=True)
+# print(df)
+
+# df.drop(df.columns[[0,1,2,3,4,5,6]], axis=1, inplace=True)
 # print(df)
 
 #데이터 유형 변경 1 (숫자로 변환하기 - df.columns.astype())
@@ -38,8 +42,10 @@ df.set_index('사업장명', inplace=True)
 # print(df.dtypes)
 
 #데이터 유형 변경 3 (문자열 다루기)
+# df.주민등록번호 = df.주민등록번호.fillna(0)
+# df.주민등록번호 = df.주민등록번호.apply(int)
 # df.주민등록번호 = df.주민등록번호.apply(str)
-# df.주민등록번호 = df.주민등록번호.apply(lambda x: str(x[0:6])+'-'+str(x[6:]))
+# df.주민등록번호 = df.주민등록번호.apply(lambda x: x[0:6]+'-'+x[6:])
 # print(df.head(15))
 # print(df.dtypes)
 # print(df.info())
