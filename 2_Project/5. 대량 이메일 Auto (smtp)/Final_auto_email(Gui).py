@@ -230,6 +230,7 @@ class window(QWidget):
                     # message Part 2 ([첨부파일] 삽입)
                     try:
                         file_name= i[4]
+                        print(file_name)
                         part = MIMEBase('application','octet-stream') #고정값인듯?
                         part.set_payload(open(file_name,'rb').read()) #파일을 읽어서 MIMEBase에 업로드하고
                         encoders.encode_base64(part) #디코딩해라
