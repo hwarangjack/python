@@ -12,10 +12,10 @@ from PySide2.QtGui import QIcon
 import sys
 
 # qt.qpa.plugin 오류가 발생한 경우(집에서 할 때) 살려둘 것
-pyside_package_dir =  os.path.abspath(os.path.dirname(__file__))
-dirname = 'c:\\users\\화랑\\appdata\\local\\programs\\python\\python38-32\\lib\\site-packages\\pyside2'
-plugin_path = os.path.join(dirname, 'plugins', 'platforms')
-os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = plugin_path
+# pyside_package_dir =  os.path.abspath(os.path.dirname(__file__))
+# dirname = 'c:\\users\\화랑\\appdata\\local\\programs\\python\\python38-32\\lib\\site-packages\\pyside2'
+# plugin_path = os.path.join(dirname, 'plugins', 'platforms')
+# os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = plugin_path
 
 
 class window(QWidget):
@@ -40,6 +40,10 @@ class window(QWidget):
         #1 main_layout > group1 > V Box
         self.vb1 = QVBoxLayout()
         self.group1.setLayout(self.vb1)
+        #1 main_layout > group1 > V Box > Qlabel
+        self.explain = QPushButton('Upload할 Excel 파일 준비 도움말')
+        self.vb1.addWidget(self.explain)
+        self.explain.clicked.connect(self.explain_excel)
         #1 main_layout > group1 > V Box > H Box
         self.hb_filename = QHBoxLayout()
         self.vb1.addLayout(self.hb_filename)
@@ -80,7 +84,7 @@ class window(QWidget):
         self.btn_login.clicked.connect(self.email_check)
 
         #3 main_layout > group3
-        self.group3 = QGroupBox('(공통)메일내용')
+        self.group3 = QGroupBox('메일내용')
         self.main_layout.addWidget(self.group3)
         #3 main_layout > group3 > V box
         self.vb3 = QVBoxLayout()
@@ -92,11 +96,11 @@ class window(QWidget):
         self.le_subject=QLineEdit()
         self.vb3.addWidget(self.le_subject)
         #3 main_layout > group3 > V box > CK box
-        self.chkb_subject_plus = QCheckBox('(공통)메일제목에 수신자 추가',self)
+        self.chkb_subject_plus = QCheckBox('메일제목에 수신자명을 추가',self)
         self.vb3.addWidget(self.chkb_subject_plus)
         self.chkb_subject_plus.stateChanged.connect(self.plus_subject)
         #3 main_layout > group3 > V box > Label3
-        self.lbl_contents = QLabel('※ 메일본문')
+        self.lbl_contents = QLabel('(공통) 메일본문')
         self.vb3.addWidget(self.lbl_contents)
         #3 main_layout > group3 > V box > TE
         self.te_contents=QTextEdit()
@@ -121,6 +125,20 @@ class window(QWidget):
         self.hb4.addWidget(self.btn_all_clear)
         self.btn_all_clear.clicked.connect(self.reset)
 
+    def explain_excel(self):
+        QMessageBox.about(self, 'Upload할 Excel 파일 형식', '복수의 대상자에게 메일을 전송하기 위해서는 다음과 같은 엑셀파일을 준비하세요\n\
+A1~E1까지는 아래와 같이 목차를 입력해야 합니다.\n\
+A1 : 구분(발송할 대상자의 총 인원수를 기재할 수 있습니다)\n\
+B1 : 발송대상(1이라고 입력된 대상자에게만 발송됩니다)\n\
+C1 : 수신자(수신자의 이름을  입력하세요)\n\
+D1 : 이메일주소(이메일주소를 ####@####.### 형식으로 입력하세요)\n\
+E1 : 첨부파일(첨부할 파일명을 ###.###형식으로 입력하고, 실행프로그램과 같은 폴더에 위치하세요)\n\
+\n\
+다음 예시에 따라 A2부터 E2까지 실제 데이터를 입력하세요.\n\
+\n\
+구분 | 발송대상 | 수신자 | 이메일 주소   | 첨부파일\n\
+1     |      1      | 홍길동 | abc@abc.com| abc.pdf')
+        
 
     def fix_filename(self):
         # filename = qfiledialog.getopenfilename(단일파일)(부모, 다이어로그 제목, dialog     초기 경로, dialog에서 보여줄 파일 종류)
