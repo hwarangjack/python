@@ -1,0 +1,20 @@
+
+<!-- views.py : instance_question_list라는 객체에는 question 테이블의 모든 내용을 입력시켜 놓았음 // dataframe-->
+<!-- views.py : template에서는 instance_question 대신 template_question_list로 지정해 놓았음-->
+{% if template_question_list %}
+    <ul>
+
+<!-- 테이블에 기재된 모든값을 For문으로 돌리며 하나씩의 Question 테이블 Row를 불러옴-->
+    {% for i in template_question_list %}
+
+    <!-- 테이블에 기재된 모든값을 For문으로 돌리며 하나씩의 Question 테이블 Row를 i에 할당함-->
+    <!-- 한편, i는 각각 Question 데이터 베이스를 의미하므로 Model에서 지정한 것처럼 id(primary Key)값과 Text 더 나아가 date도 존재함-->
+        <li><a href="/polls/{{i.id}}/">{{ i.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+
+{% else %}
+    <p>no exist template_question_list. find out what happen</p>
+
+{% endif %}
+
