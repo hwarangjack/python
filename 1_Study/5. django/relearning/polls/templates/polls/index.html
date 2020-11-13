@@ -9,7 +9,8 @@
 
     <!-- 테이블에 기재된 모든값을 For문으로 돌리며 하나씩의 Question 테이블 Row를 i에 할당함-->
     <!-- 한편, i는 각각 Question 데이터 베이스를 의미하므로 Model에서 지정한 것처럼 id(primary Key)값과 Text 더 나아가 date도 존재함-->
-        <li><a href="/polls/{{i.id}}/">{{ i.question_text }}</a></li>
+        <!-- <li><a href="/polls/{{i.id}}/">{{ i.question_text }}</a></li> -->
+        <li><a href="{% url 'polls:detail' i.id %}">{{ i.question_text }}</a></li>
     {% endfor %}
     </ul>
 

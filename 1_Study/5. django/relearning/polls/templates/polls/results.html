@@ -1,0 +1,9 @@
+<h1> {{ template_detail_question.question_text }}</h1>
+
+<ul>
+{% for i in template_detail_question.choice_set.all %}
+    <li> {{ i.choice_text }} - {{ i.votes }} vote{{ i.votes|pluralize}}</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'polls:detail' template_detail_question.id %}">vote again?</a>

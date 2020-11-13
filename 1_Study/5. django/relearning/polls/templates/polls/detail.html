@@ -5,7 +5,7 @@
 
 {% if error_message %}<p><strong>{{error_message}}</strong></p>{% endif %}
 
-<!-- 제출될 때에는 url의 app_name이 polls인 곳으로 찾아가고, path name이 vote인 곳으로 이동하되, 
+<!--템플릿 함수 <% url / urlpattern / arguments_in_the_url %> : url의 app_name이 polls인 곳으로 찾아가고, path name이 vote인 곳으로 이동하되, 
     template_detail_question에 할당된 id(primary key)값을 인자값에 가지고 가라-->
 <form action="{% url 'polls:vote' template_detail_question.id %}" method="post">
 
