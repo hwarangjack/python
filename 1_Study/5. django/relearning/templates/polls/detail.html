@@ -1,4 +1,10 @@
+{% extends 'frame.html' %}
 
+{% block title %}
+<title>detail.html</title>
+{% endblock title %}
+
+{% block content %}
 <!-- views.py : instance_detail_question라는 객체에는 question 테이블의 단일 내용이 입력되어 있음 // row-->
 <!-- views.py : template에서는 instance_detail_question 대신 template_detail_question으로 지정되어 있음-->
 <h1>{{ template_detail_question.question_text }} </h1>
@@ -19,3 +25,4 @@
 
 <input type="submit" value="vote" />
 </form>
+{% endblock content %}

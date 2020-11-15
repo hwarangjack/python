@@ -1,3 +1,10 @@
+{% extends 'frame.html' %}
+
+{% block title %}
+<title>index.html</title>
+{% endblock title %}
+
+{% block content %}
 
 <!-- views.py : instance_question_list라는 객체에는 question 테이블의 모든 내용을 입력시켜 놓았음 // dataframe-->
 <!-- views.py : template에서는 instance_question 대신 template_question_list로 지정해 놓았음-->
@@ -19,3 +26,4 @@
 
 {% endif %}
 
+{% endblock content %}

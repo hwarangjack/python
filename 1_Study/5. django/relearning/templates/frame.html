@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title%}
+    <title>Django's Pratice</title>
+    {% endblock title%}
+</head>
+<body>
+    {% include "nav.html" %}
+
+    {% block content %}
+    <h1>Welcome! this is Django Practice page!</h1>
+    {% endblock content %}
+</body>
+</html>
