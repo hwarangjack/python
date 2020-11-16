@@ -1,0 +1,10 @@
+{% extends 'frame.html' %}
+
+{% block title %}
+<title>create question</title>
+{% endblock title %}
+
+{% block content %}
+<a href ="{% url 'polls:createquestion' %}">Create Question</a>
+<a href ="{% url 'polls:createchoice' %}">Create Choice</a>
+{% endblock content %}

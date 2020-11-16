@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Question,Choice
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from .forms import CreateChoiceForm, CreateQuestionForm
 
 def index(request):
     # Polls.models.py에서 정의된 Quesition 객체(Question.objects.all())를 date라는 컬럼 5개를 정렬해서 구성하여 변수에 할당
@@ -50,3 +51,30 @@ def vote(request, question_id):
 def results(request, question_id):
     instance_detail_question = get_object_or_404(Question, pk=question_id)
     return render(request, 'polls/results.html', {'template_detail_question':instance_detail_question})
+
+
+def create(request):
+    return render(request, 'polls/create.html')
+
+
+def CreateQuestion(request):
+    form = CreateQuestionForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        form = CreateQuestionForm()
+
+    context = {
+        'form':form
+    }
+    return render(request, 'polls/createquestion.html', context)
+    
+def CreateChoice(request):
+    form = CreateChoiceForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        form = CreateChoiceForm()
+
+    context = {
+        'form':form
+    }
+    return render(request, 'polls/createchoice.html', context)
