@@ -5,9 +5,15 @@
 {% endblock title %}
 
 {% block content %}
-{{ subject.title }}
-{{ subject.date }}
-{{ subject.etc }}
-
+<table border="1">
+<tr>
+    <td>구분</td><td>작성자</td><td>날짜</td><td>내용</td></br>
+</tr>
+{% for i in subject %}
+<tr>
+    <td>{{forloop.counter}}</td><td>{{i.name}}</td><td>{{i.date}}</td><td>{{i.etc}}</td>
+</tr>
+{% endfor %}
+</table>
 
 {% endblock content %}

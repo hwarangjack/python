@@ -5,9 +5,12 @@
 {% endblock title %}
 
 {% block content %}
+<h6>Raw Craeate</h6>
 
 <form action="." method="POST"> {% csrf_token %}
 {{form.as_p}}
 <input type="submit", value="save" />
 </form>
+
+
 {% endblock content %}

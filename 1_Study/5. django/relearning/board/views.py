@@ -1,7 +1,15 @@
 from django.shortcuts import render
 from .models import register
-from .froms import resisterForm
+from .froms import resisterForm, RawResisterForm
 
+
+
+def board(request):
+    subject = register.objects.all()
+    context = {
+        'subject':subject,
+    }
+    return render(request, 'board/detail.html', context)
 
 def create(request):
     form = resisterForm(request.POST or None)
@@ -15,11 +23,19 @@ def create(request):
     return render(request, 'board/create_board.html', context)
 
 
+def Rawcreate(request):
+    form = RawResisterForm()
+    if request.method == "POST":
+        form = RawResisterFrom(request.POST)
 
-def board(request):
-    subject = register.objects.get(pk=1)
+        if form.is_valid():
+            register.objects.create(form.cleaned_data)
+            form = RawResisterForm()
+        else:
+            print(form.errors)
+
     context = {
-        'subject':subject,
+        'form':form,
     }
-    return render(request, 'board/detail.html', context)
+    return render(request, 'board/rawcreate_board.html', context)
 

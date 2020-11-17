@@ -9,4 +9,5 @@ app_name = 'board'
 urlpatterns = [
     path('', views.board, name='index_page'),
     path('create/', views.create, name='create'),
+    path('create/raw', views.Rawcreate, name='rawcreate'),
 ]

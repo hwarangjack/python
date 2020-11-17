@@ -9,3 +9,8 @@ class resisterForm(forms.ModelForm):
             'date',
             'etc'
         ]
+
+class RawResisterForm(forms.Form):
+    name = forms.CharField(max_length=20)
+    date = forms.TimeField(widget=forms.TextInput(attrs={"placeholder":"YYYY-MM-DD"}))
+    etc = forms.CharField(widget=forms.Textarea(attrs={"class":"whatever","rows":3,"cols":120}))
