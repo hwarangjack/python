@@ -5,5 +5,5 @@ from django.db import models
 class post(models.Model):
     who = models.CharField(max_length=30)
     text = models.TextField()
-    picture = models.ImageField()
+    # picture = models.ImageField()
     date = models.DateTimeField()
