@@ -7,4 +7,7 @@ class post(models.Model):
     text = models.TextField()
     picture = models.FileField(null=True)
     date = models.DateTimeField()
+
+    def __str__(self):
+        return self.who
     

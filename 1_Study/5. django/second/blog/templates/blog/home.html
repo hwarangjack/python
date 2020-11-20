@@ -1,20 +1,14 @@
-<!DOCTYPE html>
-<html lang="kr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
+{% extends 'blog/frame.html' %}
 
-    <table border=1>
-        {% for i in post_all %}         
-        <tr>
-            <td>{{i.who}}</td><td>{{i.text}}</td><td>{{i.picture.name}}</td><td>{{i.date}}</td>
-        </tr>
-        {% endfor %}
-    </table>
 
-    
-</body>
-</html>
+{% block content %}
+<table border=1>
+    {% for i in post_all %}         
+    <tr>
+        <td>{{i.who}}</td><td>{{i.text}}</td><td>{{i.picture.name}}</td><td>{{i.date}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock content %}
+

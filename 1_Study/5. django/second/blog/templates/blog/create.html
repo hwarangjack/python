@@ -1,16 +1,15 @@
-<!DOCTYPE html>
-<html lang="kr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>글쓰기</title>
-</head>
-<body>
+{% extends 'blog/frame.html' %}
 
-    <form method = "POST" enctype="multipart/form-data">{% csrf_token %}   <!--POST 중에서 File 전송이 포함되어 있는 경우에는 enctype 작성 필요한 듯 -->
-    {{ form.as_p }}
-    <input type="submit", value="save" />
-    </form>
+{% block title %}
+<title>글쓰기</title>
+{% endblock title %}
 
-</body>
-</html>
+
+{% block content %}
+
+<form method = "POST" enctype="multipart/form-data">{% csrf_token %}   <!--POST 중에서 File 전송이 포함되어 있는 경우에는 enctype 작성 필요한 듯 -->
+{{ form.as_p }}
+<input type="submit", value="save" />
+</form>
+
+{% endblock content %}
