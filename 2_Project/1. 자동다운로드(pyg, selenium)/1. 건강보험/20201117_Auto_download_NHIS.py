@@ -123,6 +123,7 @@ for i in a:
         # pyg.press('enter')
         # time.sleep(1.5*time_interval)
         driver.switch_to_window(driver.window_handles[0])
+        time.sleep(1*time_interval)
        
         
         #받은문서 클릭
