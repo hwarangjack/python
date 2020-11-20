@@ -10,7 +10,7 @@
     <table border=1>
         {% for i in post_all %}         
         <tr>
-            <td>{{i.who}}</td><td>{{i.text}}</td><td>{{i.picture}}</td><td>{{i.date}}</td>
+            <td>{{i.who}}</td><td>{{i.text}}</td><td>{{i.picture.name}}</td><td>{{i.date}}</td>
         </tr>
         {% endfor %}
     </table>

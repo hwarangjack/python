@@ -7,7 +7,7 @@
 </head>
 <body>
 
-    <form method = "POST">{% csrf_token %}
+    <form method = "POST" enctype="multipart/form-data">{% csrf_token %}   <!--POST 중에서 File 전송이 포함되어 있는 경우에는 enctype 작성 필요한 듯 -->
     {{ form.as_p }}
     <input type="submit", value="save" />
     </form>
