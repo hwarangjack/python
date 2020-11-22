@@ -1,14 +1,16 @@
 {% extends 'blog/frame.html' %}
 
 {% block title %}
-<title>글쓰기 완료</title>
+<title>글쓰기</title>
 {% endblock title %}
 
 
 {% block content %}
-<br>
-정상적으로 글쓰기가 완료되었습니다
-<br>
-<a href = "{% url 'blog:home' %}">블로그로 돌아가기</a>
+
+<form action="." method = "POST" enctype="multipart/form-data">{% csrf_token %}   <!--POST 중에서 File 전송이 포함되어 있는 경우에는 enctype 작성 필요한 듯 -->
+{{ form.as_p }}
+<input type="submit", value="글쓰기 완료" />
+</form>
+<a href="{% url 'blog:home'%}">목록으로 돌아가기</a>
 
 {% endblock content %}

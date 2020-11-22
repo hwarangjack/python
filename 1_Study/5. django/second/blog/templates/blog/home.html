@@ -2,15 +2,43 @@
 
 
 {% block content %}
-<table border=1>
+
+{% load static %}
+
+<table border="1">
+    <tr>
+        <th>post_Num</th>
+        <th>작성자</th>
+        <th>Post</th>
+        <th>첨부파일</th>
+        <th>첨부파일 경로</th>
+        <th>등록일자</th>   
+    </tr>
+
+
+
     {% for i in post_all %}         
     <tr>
-        <td>{{i.who}}</td><td>{{i.text}}</td><td>{{i.picture.name}}</td><td>{{i.date}}</td>
+        <td>{{i.id}}</td>
+        <td>{{i.who}}</td>
+        <td>{{i.text}}</td>
+        <td align="center">{% if i.picture.name|length > 0 %}
+            <a href="{% url 'blog:download' i.id %}"><img src="{% static '/images/download.png' %}" width="25px" height="25px"></a>
+            {% endif %}
+        </td>
+        <td align="center">{% if i.picture.name|length > 0 %}
+            {{i.picture.path}}
+            {% endif %}
+        </td>
+        <td>{{i.date}}</td>
     </tr>
     {% endfor %}
 </table>
+<br>
+등록된 Post : {{post_all.count}}<br>
+<br>
 
-<a href="{% url 'blog:postform' %}"">글쓰기</a>
+<a href="{% url 'blog:create' %}">글쓰기</a>
 
 {% endblock content %}
 
