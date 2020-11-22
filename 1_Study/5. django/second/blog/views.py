@@ -2,12 +2,16 @@ from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from .forms import post_form
 from .models import post
 
+
+
 def blog_home(request):
     post_all = post.objects.all()
     context = {
         'post_all':post_all,
     }
     return render(request, 'blog/home.html', context)
+
+
 
 
 def blog_create(request):
@@ -32,13 +36,14 @@ import os
 from django.utils.http import urlquote
 
 
+
+
 def download(request, postnum):
     instance = get_object_or_404(post, pk=postnum) #인수로 넘어온 DB Row 특정
-    file_path = instance.picture.url[1:]  #해당 DB row에 기재된 파일경로 특정 // 문자열의 [0]에 해당하는 '/'는 제거하여 path 구성
+    file_path = instance.Upload_file.url[1:]  #해당 DB row에 기재된 파일경로 특정 // 문자열의 [0]에 해당하는 '/'는 제거하여 path 구성
 
     if os.path.exists(file_path):
         with open(file_path, 'rb') as f:
             response = HttpResponse(f.read(), content_type='application/octet-stream')
             response['Content-Disposition'] = f"attachment;filename*=UTF-8''{os.path.basename(file_path)}"
         return response
-

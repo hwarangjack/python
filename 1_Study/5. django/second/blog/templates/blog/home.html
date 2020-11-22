@@ -22,12 +22,12 @@
         <td>{{i.id}}</td>
         <td>{{i.who}}</td>
         <td>{{i.text}}</td>
-        <td align="center">{% if i.picture.name|length > 0 %}
+        <td align="center">{% if i.Upload_file.name|length > 0 %}
             <a href="{% url 'blog:download' i.id %}"><img src="{% static '/images/download.png' %}" width="25px" height="25px"></a>
             {% endif %}
         </td>
-        <td align="center">{% if i.picture.name|length > 0 %}
-            {{i.picture.path}}
+        <td align="center">{% if i.Upload_file.name|length > 0 %}
+            {{i.Upload_file.path}}
             {% endif %}
         </td>
         <td>{{i.date}}</td>
