@@ -366,7 +366,7 @@ class window(QWidget):
             f.write(f'\n\n ------------------ [  {self.topic} 관련 ] ------------------\n\n')
 
         page=driver.find_element_by_css_selector('#cs-list-tbl').find_element_by_css_selector('tbody')
-
+#E01_w_md > div > div.case_contents > div.case-L > div.case-tit > span
         for i in range(self.count):
             topic=page.find_elements_by_css_selector('tr')[i]
             court=topic.find_elements_by_css_selector('td')[1].find_elements_by_css_selector('span')[0].text

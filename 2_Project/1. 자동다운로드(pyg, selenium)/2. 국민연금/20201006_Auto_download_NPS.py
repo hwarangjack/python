@@ -34,7 +34,7 @@ for i in a:
     clipboard.copy(file_name)
 
     #사업장리스트 클릭
-    pyg.click(1305,580)
+    pyg.click(1305,560)
     time.sleep(3*time_interval) 
 
     #개별사업장 조회 및 결정        
