@@ -141,8 +141,11 @@ class window(QWidget):
         self.btn5.clicked.connect(self.elabor_search)
 
         #hb_5_2 설정
-        self.nlrc=QLabel('노동위원회')
+        self.nlrc=QLabel('지노위 지역')
         self.hb_5_2.addWidget(self.nlrc)
+
+        self.legion_input=QLineEdit()
+        self.hb_5_2.addWidget(self.legion_input)
 
         self.case_num2 = QLabel('검색개수')
         self.hb_5_2.addWidget(self.case_num2)
@@ -480,6 +483,14 @@ class window(QWidget):
                                                                    QMessageBox.Yes | QMessageBox.No)
 
         if start_search2 == QMessageBox.Yes:
+            if self.legion_input.text() == '서울':
+                self.legion_input = 'seoul'
+            elif self.legion_input.text() == '경기':
+                self.legion_input = 'gyeonggi'
+            elif self.legion_input.text() == '인천':
+                self.legion_input = 'incheon'
+            else:
+                self.legion_input = 'nlrc'
             self.topic2 = self.search2_input.text()
             self.count2 = int(self.case_num2_input.text())
             self.event_scrap_nlrc()
@@ -491,7 +502,7 @@ class window(QWidget):
 
     def event_scrap_nlrc(self):
         driver=webdriver.Chrome()
-        driver.get('http://www.nlrc.go.kr/nlrc/seoul/md/search_case.go')
+        driver.get(f'http://www.nlrc.go.kr/nlrc/{self.legion_input}/md/search_case.go')
         driver.maximize_window()
 
         with open(f'{self.input_name}.txt','a', encoding='utf8') as f:
