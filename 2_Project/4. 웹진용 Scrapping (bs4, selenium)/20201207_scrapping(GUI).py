@@ -502,7 +502,7 @@ class window(QWidget):
 
     def event_scrap_nlrc(self):
         driver=webdriver.Chrome()
-        driver.get(f'http://www.nlrc.go.kr/nlrc/{self.legion_input}/md/search_case.go')
+        driver.get(f'https://www.nlrc.go.kr/nlrc/{self.legion_input}/md/search_case.go')
         driver.maximize_window()
 
         with open(f'{self.input_name}.txt','a', encoding='utf8') as f:
