@@ -79,13 +79,13 @@ seven=[604,399]
 for i in a:
     try:
         driver.switch_to_window(driver.window_handles[0])
-        time.sleep(1*time_interval)
+        time.sleep(2*time_interval)
         #사업장리스트 클릭
             # four=pyg.locateCenterOnScreen('step4.png')
             # pyg.click(four.x,four.y,2)
             # time.sleep(2*time_interval)
         driver.find_element_by_css_selector('#loginAfter_box > dd.suim > img').click()
-        time.sleep(5)
+        time.sleep(1*time_interval)
         # # 사업장 객체 클릭
             # five=pyg.locateCenterOnScreen('step5.png')
             # pyg.click(five.x-80,five.y-50)
