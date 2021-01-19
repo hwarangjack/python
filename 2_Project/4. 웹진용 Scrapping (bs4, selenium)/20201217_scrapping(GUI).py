@@ -485,6 +485,8 @@ class window(QWidget):
                 self.legion_input = 'gyeonggi'
             elif self.legion_input.text() == '인천':
                 self.legion_input = 'incheon'
+            elif self.legion_input.text() == '부산':
+                self.legion_input = 'busan'
             else:
                 self.legion_input = 'nlrc'
             self.topic2 = self.search2_input.text()
