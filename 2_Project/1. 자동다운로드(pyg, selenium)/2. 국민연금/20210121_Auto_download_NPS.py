@@ -6,7 +6,6 @@ import clipboard
 # pyg.displayMousePosition()
 yyyymm=pyg.prompt('yyyymm을 입력하세요 : ',title='대상연도(yyyy)와 월(mm)지정')
 time_interval=float(pyg.prompt('프로그램의 실행속도를 입력하세요 (기본속도 1): ',title='Time Interval', default=1))
-pw=pyg.password('공인인증서의 비밀번호를 입력하세요 : ', title='공인인증서')
 pyg.confirm('프로그램을 실행합니다.')
 
 
