@@ -26,57 +26,61 @@ a=df3.사업장관리번호.tolist()
 
 for i in a:
     
-    # 화면전환시간
-    time.sleep(2*time_interval)
+    if i == '61605986810' :
+        pass
 
-    # 파일저장이름 준비
-    file_name=yyyymm+' '+str(i)+' dusrma'
+    else:    
+        # 화면전환시간
+        time.sleep(2*time_interval)
 
-    #사업장전환 클릭
-    pyg.click(1758,87) 
-    time.sleep(2*time_interval)
+        # 파일저장이름 준비
+        file_name=yyyymm+' '+str(i)+' dusrma'
 
-    #사업장관리번호 입력
-    pyg.press('tab')
-    time.sleep(0.5*time_interval)
-    pyg.press('up')
-    time.sleep(0.5*time_interval)
-    pyg.press('tab')
-    time.sleep(0.5*time_interval)
-    pyg.typewrite(str(i))
-    time.sleep(1*time_interval)
-    pyg.press('enter')
-    time.sleep(1*time_interval)
+        #사업장전환 클릭
+        pyg.click(1758,87) 
+        time.sleep(2*time_interval)
 
-    #개별사업장 클릭
-    pyg.click(971,335,2) 
-    time.sleep(7*time_interval)
+        #사업장관리번호 입력
+        pyg.press('tab')
+        time.sleep(0.5*time_interval)
+        pyg.press('up')
+        time.sleep(0.5*time_interval)
+        pyg.press('tab')
+        time.sleep(0.5*time_interval)
+        pyg.typewrite(str(i))
+        time.sleep(1*time_interval)
+        pyg.press('enter')
+        time.sleep(1*time_interval)
 
-    #보험료결정내역 클릭
-    pyg.click(97,533) 
-    time.sleep(1*time_interval)
-    pyg.click(97,569) 
-    time.sleep(2*time_interval)
+        #개별사업장 클릭
+        pyg.click(971,335,2) 
+        time.sleep(7*time_interval)
 
-    #최신 보험료내역 클릭
-    pyg.click(828,368,2) 
-    time.sleep(2.5*time_interval)
+        #보험료결정내역 클릭
+        pyg.click(97,533) 
+        time.sleep(1*time_interval)
+        pyg.click(97,569) 
+        time.sleep(2*time_interval)
 
-    #통합저장
-    pyg.click(1848,366) 
-    time.sleep(5*time_interval)
+        #최신 보험료내역 클릭
+        pyg.click(828,368,2) 
+        time.sleep(2.5*time_interval)
 
-    #파일이름 입력
-    pyg.typewrite(str(file_name))
-    time.sleep(1*time_interval)
-    pyg.press('enter')
-    time.sleep(1*time_interval)
+        #통합저장
+        pyg.click(1848,366) 
+        time.sleep(5*time_interval)
 
-    #크롬 하단 다운로드 표시 X 클릭
-    pyg.click(1900,1009) 
-    time.sleep(1*time_interval)
+        #파일이름 입력
+        pyg.typewrite(str(file_name))
+        time.sleep(1*time_interval)
+        pyg.press('enter')
+        time.sleep(1*time_interval)
 
-    print(file_name+' 완료')
+        #크롬 하단 다운로드 표시 X 클릭
+        pyg.click(1900,1009) 
+        time.sleep(1*time_interval)
+
+        print(file_name+' 완료')
 
 
 pyg.confirm('프로그램을 모두 완료하엿습니다.')
