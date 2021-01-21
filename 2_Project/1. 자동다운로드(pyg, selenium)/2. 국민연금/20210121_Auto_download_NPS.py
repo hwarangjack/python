@@ -35,7 +35,7 @@ for i in a:
 
     #사업장전환 클릭
     pyg.click(1758,87) 
-    time.sleep(4*time_interval)
+    time.sleep(2*time_interval)
 
     #사업장관리번호 입력
     pyg.press('tab')
@@ -47,11 +47,11 @@ for i in a:
     pyg.typewrite(str(i))
     time.sleep(1*time_interval)
     pyg.press('enter')
-    time.sleep(1.5*time_interval)
+    time.sleep(1*time_interval)
 
     #개별사업장 클릭
     pyg.click(971,335,2) 
-    time.sleep(10*time_interval)
+    time.sleep(7*time_interval)
 
     #보험료결정내역 클릭
     pyg.click(97,533) 
@@ -74,7 +74,7 @@ for i in a:
     time.sleep(1*time_interval)
 
     #크롬 하단 다운로드 표시 X 클릭
-    ppyg.click(1900,1009) 
+    pyg.click(1900,1009) 
     time.sleep(1*time_interval)
 
     print(file_name+' 완료')
