@@ -44,7 +44,7 @@ for name in object_list:
             print('----> '+name+'의 건강보험 파일이 존재하지 않습니다.')
 
         #연금보험 작업
-        filename1=standard_name+' 연금.xls'
+        filename1=standard_name+' 연금.xlsx'
         if os.path.isfile(filename1):
             n5=pd.read_excel(filename1, sheet_name=0)
             n3=n5        
