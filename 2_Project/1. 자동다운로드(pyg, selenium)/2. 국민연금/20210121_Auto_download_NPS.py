@@ -22,11 +22,16 @@ df3.set_index('구분', inplace=True)
 df3.sort_values(by='사업장명',ascending=True, inplace=True)
 df3.사업장관리번호=df3.사업장관리번호.apply(lambda x: int(x))
 a=df3.사업장관리번호.tolist()
+
+except_object =[
+    61605986810,
+]
+
 #------------- 사업장 변환하며 시작되는 반복구문
 
 for i in a:
     
-    if i == '61605986810' :
+    if i in except_object:
         pass
 
     else:    
