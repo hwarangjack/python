@@ -6,7 +6,7 @@ import re
 
 # 대상파일 획정하기
 path='D:\\NaverCloud\\화랑\\☆ 자문'
-how='2020년\s*임금대장\s*.+[.]x+'
+how='2021년\s*임금대장\s*.+[.]x+'
 
 empty_list=[]
 
@@ -18,13 +18,15 @@ def checkfile(path, target):
         abs_path = os.path.join(path,i)
         if os.path.isfile(abs_path):    #os.path.join 함수는 절대경로가 있는 파일만 Read 할 수 있는 것 같음
             if cp.match(i):
-                empty_list.append([abs_path,os.path.split(abs_path)[0],os.path.split(abs_path)[1]])
+                empty_list.append(os.path.split(abs_path)[1])
         
         elif os.path.isdir(abs_path):
             checkfile(abs_path, target)
 checkfile(path,how)
 
+print(len(empty_list))
+
 # 대상파일을 현재작업폴더에 복사하기
-for i in empty_list:
-    shutil.copy(i[0],os.path.join(os.getcwd(),i[2]))
+# for i in empty_list:
+#     shutil.copy(i[0],os.path.join(os.getcwd(),i[2]))
 
