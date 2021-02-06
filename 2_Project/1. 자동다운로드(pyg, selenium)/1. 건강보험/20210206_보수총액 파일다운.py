@@ -47,12 +47,8 @@ if user == 1:
     time.sleep(0.1*time_interval)
 else:
     pass
-pyg.press('down')
-time.sleep(0.1*time_interval)
-pyg.press('down')
-time.sleep(0.1*time_interval)
-pyg.press('enter')
-time.sleep(0.1*time_interval)
+pyg.click(922,543)
+time.sleep(0.5*time_interval)
 pyg.press('tab')
 time.sleep(0.1*time_interval)
 pyg.press('tab')
