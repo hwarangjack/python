@@ -3,10 +3,7 @@ import os
 import win32com.client
 import time
 
-
-# 수정파일 확정하기
-empty_list=[]
-
+# 파일탐색 함수
 def checkfile(path, target):
     cp=re.compile(target)
     for i in os.listdir(path):
@@ -17,19 +14,23 @@ def checkfile(path, target):
         elif os.path.isdir(abs_path):
             checkfile(abs_path, target)
 
-path='D:\\NaverCloud\\화랑\\☆ 자문'
+# 대상파일 리스트로 정리하기
+empty_list=[]
+path='C:\Users\화랑\Desktop\예시'
 how='2021년\s*임금대장\s*.+[.]x+'
 checkfile(path,how)
+print(empty_list,'\n')
 
-
-# 파일접근
-
+# Win32com 사용하여 객체 접근하기
 excel = win32com.client.Dispatch('Excel.Application')
 excel.Visible = True
 excel.displayalerts = False
 
 for i in empty_list:
     wb = excel.workbooks.Open(i)
+
+
+    #변경할 내용
     ws = wb.worksheets('(조건)')
     ws.cells(6,16).value = 0.1152
     ws.cells(16,18).value = 0.1152
