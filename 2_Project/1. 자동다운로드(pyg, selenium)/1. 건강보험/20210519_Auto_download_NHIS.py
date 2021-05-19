@@ -38,7 +38,7 @@ time.sleep(2*time_interval)
 
 #범용인증서 클릭 & 암호칸 입력
 
-for i in range(user):
+for i in range(int(user)):
     pyg.press('down')
     time.sleep(0.1*time_interval)
 
