@@ -1,10 +1,10 @@
-import time
+from datetime import timedelta
 from urllib.request import urlopen
-from urllib.parse import quote_plus, urlunparse
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from bs4 import BeautifulSoup
-from time import sleep
+from time import sleep, time, timezone
+import pyautogui as pya
 
 context=[]
 
@@ -60,7 +60,6 @@ def getItemByMoel(count):
     news = soup.find_all('a', class_='b_tit')
     firstPostUrl = news[1].attrs['href']
     UrlNum = firstPostUrl[-5:]
-    context = []
 
     for i in range(count):
         intUrlNum = int(UrlNum)-i
@@ -124,6 +123,7 @@ def UploadItemNews(items):
         sleep(1)
         
         i[0] = '[고용노동부]'+i[0]
+        i[1] = '[고용노동부 뉴스 발췌]'+i[1]
 
         driver.find_element_by_css_selector('body > div > div > div.content_wrapper > div.location_flexend > a > button').click()
 
@@ -135,10 +135,10 @@ def UploadItemNews(items):
         driver.find_element_by_css_selector('#id_news_content').click()
         sleep(1)
         driver.find_element_by_css_selector('#id_news_content').send_keys(i[1])
-        sleep(5)
+        sleep(1)
         driver.find_element_by_css_selector('body > div > div > div.content_wrapper > form > div.location_flexend > button').click()
 
 
 UploadItemNews(
-    getItemByMoel(5)
+    getItemByMoel(3)
 )
