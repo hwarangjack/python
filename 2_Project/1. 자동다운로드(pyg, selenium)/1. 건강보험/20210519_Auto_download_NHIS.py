@@ -4,18 +4,16 @@ from selenium.webdriver.common.keys import Keys
 import pandas as pd
 import time
 
-# now=pyg.position()
-# pyg.screenshot('step5.png',region=(now.x,now.y,120,30))
 
 # 향후 파일이름 생성시 변수 생성
-user=pyg.prompt('집에서 작업하면 1, 사무실이면 2', title='공인인증서 횟수 선택')
+user=pyg.prompt('법인 공인인증서 위치', title='공인인증서 횟수 선택')
 yyyymm=pyg.prompt('yyyymm을 입력하세요 : ',title='대상연도(yyyy)와 월(mm)지정')
 time_interval=float(pyg.prompt('프로그램의 실행속도를 입력하세요 (기본속도 1): ',title='Time Interval', default=1))
 pw=pyg.password('공인인증서의 비밀번호를 입력하세요 : ', title='공인인증서')
 pyg.confirm('프로그램을 실행합니다.')
 
 #공통데이터에서 자료 추출하기
-abs_path=r'D:\\NaverCloud\\화랑\\매출(자문).xlsm'
+abs_path=r'C:\\Users\\화랑\\Desktop\\1. 건강보험\\매출(자문).xlsm'
 read_df1=pd.read_excel(abs_path, sheet_name='2021', skiprows=6)
 df=pd.DataFrame(read_df1)
 read_df2=df.iloc[:,[0,1,3,4,12]]                                      # 1차 가공) 일부 데이터만 사용하기
@@ -39,15 +37,12 @@ driver.find_element_by_css_selector('#pre_login > a:nth-child(1) > img').click()
 time.sleep(2*time_interval)
 
 #범용인증서 클릭 & 암호칸 입력
-if user == 1:
+
+for i in range(user):
     pyg.press('down')
     time.sleep(0.1*time_interval)
-else:
-    pass
-pyg.press('down')
-time.sleep(0.1*time_interval)
-pyg.press('down')
-time.sleep(0.1*time_interval)
+
+
 pyg.press('enter')
 time.sleep(0.1*time_interval)
 pyg.press('tab')
@@ -82,8 +77,8 @@ except_list = [
     21781177290,#현승이앤씨
     20481888200,#이엔에스
     11309683900,#조선시대
-    65605013210,#삼곱식당
-    ]
+    # 65605013210,#삼곱식당
+]
 
 for i in a:
 
@@ -94,27 +89,15 @@ for i in a:
         try:
             driver.switch_to_window(driver.window_handles[0])
             time.sleep(2*time_interval)
+            
             #사업장리스트 클릭
-                # four=pyg.locateCenterOnScreen('step4.png')
-                # pyg.click(four.x,four.y,2)
-                # time.sleep(2*time_interval)
             driver.find_element_by_css_selector('#loginAfter_box > dd.suim > img').click()
             time.sleep(1*time_interval)
-            # # 사업장 객체 클릭
-                # five=pyg.locateCenterOnScreen('step5.png')
-                # pyg.click(five.x-80,five.y-50)
-                # time.sleep(0.5*time_interval)
-                # pyg.press('down')
-                # pyg.press('enter')
-                # pyg.doubleClick(five.x,five.y-45)
-                # pyg.press('delete')
+
 
             # #사업장명 입력
-
-                # time.sleep(1*time_interval)
-                # pyg.click(five.x-220,five.y+30,2)
-                # time.sleep(1.5*time_interval)
             driver.switch_to_window(driver.window_handles[-1])
+
             driver.find_element_by_css_selector('#srchType').click()
             driver.find_element_by_css_selector('#srchType').send_keys(Keys.DOWN)
             driver.find_element_by_css_selector('#srchType').send_keys(Keys.ENTER)
@@ -122,45 +105,16 @@ for i in a:
             pyg.typewrite(str(i))
             pyg.press('enter')
             driver.find_element_by_css_selector('#contents > table > tbody > tr:nth-child(2) > td:nth-child(3) > a').click()
-            # pyg.press('tab')
-            # time.sleep(0.1*time_interval)
-            # pyg.press('tab')
-            # time.sleep(0.1*time_interval)
-            # pyg.press('tab')
-            # time.sleep(0.1*time_interval)
-            # pyg.press('tab')
-            # time.sleep(0.1*time_interval)
-            # pyg.press('tab')
-            # time.sleep(0.1*time_interval)
-            # pyg.press('tab')
-            # time.sleep(0.1*time_interval)
-            # pyg.press('tab')
-            # time.sleep(0.1*time_interval)
-            # pyg.press('enter')
-            # time.sleep(1.5*time_interval)
+           
             driver.switch_to_window(driver.window_handles[0])
             time.sleep(1*time_interval)
         
             
             #받은문서 클릭
-                # six=pyg.locateCenterOnScreen('step6.png')
-                # pyg.click(six.x+630,six.y-15)
-                # time.sleep(6*time_interval)
             driver.find_element_by_css_selector('#loginAfter_layout_right > div:nth-child(15) > div > a > img').click()
             time.sleep(5*time_interval)
 
             #고지서 클릭
-                # seven=pyg.locateCenterOnScreen('step7-1.png')
-                # pyg.click(seven.x+80,seven.y)
-                # time.sleep(0.5*time_interval)
-                # pyg.press('down')
-                # pyg.press('down')
-                # pyg.press('enter')
-                # time.sleep(0.2*time_interval)
-                # pyg.click(seven.x+334,seven.y)
-                # time.sleep(0.7*time_interval)
-                # pyg.doubleClick(seven.x,seven.y+105)
-                # time.sleep(1.7*time_interval)
             pyg.click(one[0],one[1])
             time.sleep(0.5*time_interval)
             pyg.press('down')
@@ -174,35 +128,17 @@ for i in a:
             time.sleep(1.7*time_interval)
 
             #파일변환 클릭
-                # ten=pyg.locateCenterOnScreen('step10.png')
-                # pyg.click(ten.x-30,ten.y-40)
-                # time.sleep(1*time_interval)
+           
             pyg.click(four[0],four[1])
             time.sleep(1*time_interval)
 
             #개인별내역보기 클릭
-                # elev=pyg.locateCenterOnScreen('step11.png')
-                # pyg.click(elev.x+25,elev.y+250)
-                # time.sleep(2*time_interval)
+
             pyg.click(five[0],five[1])
             time.sleep(2*time_interval)
 
 
-            # 파일저장
-                # try:
-                #     twv=pyg.locateCenterOnScreen('step12-1.png')
-                #     pyg.click(twv.x+265,twv.y)
-                #     time.sleep(1*time_interval)
-
-                # except:
-                #     twv=pyg.locateCenterOnScreen('step12-2.png')
-                #     pyg.click(twv.x+47,twv.y+75)
-                #     time.sleep(1*time_interval)
-            
-
             #다른이름저장
-            # pyg.typewrite('a')
-            # time.sleep(1.5*time_interval)
             filename=yyyymm+" "+str(i)+' rjsrkd'
             pyg.typewrite(filename)
             time.sleep(0.5*time_interval)
