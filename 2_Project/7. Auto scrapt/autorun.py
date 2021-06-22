@@ -139,6 +139,6 @@ def UploadItemNews(items):
         driver.find_element_by_css_selector('body > div > div > div.content_wrapper > form > div.location_flexend > button').click()
 
 
-UploadItemNews(
-    getItemByMoel(3)
+UploadItemWebzine(
+    getItemByElabor('징계', 5)
 )
