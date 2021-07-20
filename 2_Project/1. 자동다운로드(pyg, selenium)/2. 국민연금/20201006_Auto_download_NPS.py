@@ -24,82 +24,71 @@ df3.sort_values(by='사업장명',ascending=True, inplace=True)
 df3.사업장관리번호=df3.사업장관리번호.apply(lambda x: int(x))
 a=df3.사업장관리번호.tolist()
 
-#------------- 최초 1회 로그인
-    #국민연금 초기 홈페이지에서는 보안때문에 pyg.Screenshot 또는 pyg.typewriter가 작동하지 않음
+except_object =[
+    61605986810, #시온관리 => 연금가입자 없음
+
+]
 
 #------------- 사업장 변환하며 시작되는 반복구문
+
 for i in a:
-    #100% 자동화가 안되어, 파일이름 먼저 따놓기
-    file_name=yyyymm+' '+str(i)+' 연금'
-    clipboard.copy(file_name)
+    
+    if i in except_object:
+        pass
 
-    #사업장리스트 클릭
-    pyg.click(1305,560)
-    time.sleep(3*time_interval) 
+    else:    
+        # 화면전환시간
+        time.sleep(2*time_interval)
 
-    #개별사업장 조회 및 결정        
-    pyg.press('tab')
-    time.sleep(0.2*time_interval)
-    pyg.press('down')
-    time.sleep(0.2*time_interval)
-    pyg.press('enter')
-    time.sleep(0.2*time_interval)
-    pyg.press('tab')
-    time.sleep(0.2*time_interval)
-    pyg.typewrite(str(i))
-    time.sleep(0.2*time_interval)
-    pyg.press('enter')
-    time.sleep(1.5*time_interval)
-    pyg.press('tab')
-    time.sleep(0.3*time_interval)
-    pyg.press('tab')
-    time.sleep(0.3*time_interval)
-    pyg.press('tab')
-    time.sleep(0.3*time_interval)
-    pyg.press('tab')
-    time.sleep(0.3*time_interval)
-    pyg.press('tab')
-    time.sleep(0.3*time_interval)
-    pyg.press('enter')
-    time.sleep(8*time_interval)
+        # 파일저장이름 준비
+        file_name=yyyymm+' '+str(i)+' dusrma'
 
-    #보험료결정내역 클릭
-    pyg.click(550,383,2)
-    time.sleep(3*time_interval)
-    pyg.click(807,314)
-    time.sleep(3*time_interval)
-    pyg.press('enter')
-    time.sleep(2*time_interval)
-    pyg.click(842,318)
-    time.sleep(2*time_interval)
-    pyg.click(1115,371)
-    time.sleep(2*time_interval)
-    pyg.press('tab')
-    time.sleep(0.2*time_interval)
-    pyg.press('down')
-    time.sleep(0.2*time_interval)
-    pyg.press('down')
-    time.sleep(0.2*time_interval)
-    pyg.press('tab')
-    time.sleep(0.2*time_interval)
-    pyg.press('tab')
-    time.sleep(0.2*time_interval)
-    pyg.press('tab')
-    time.sleep(0.2*time_interval)
+        #사업장전환 클릭
+        pyg.click(1758,87) 
+        time.sleep(2*time_interval)
 
-    pyg.press('tab')
-    time.sleep(0.2*time_interval)
-    pyg.press('tab')
-    time.sleep(0.2*time_interval)
-    pyg.typewrite(pw)
-    time.sleep(0.2*time_interval)
-    pyg.press('enter')
-    time.sleep(4*time_interval)
+        #사업장관리번호 입력
+        pyg.press('tab')
+        time.sleep(0.5*time_interval)
+        pyg.press('up')
+        time.sleep(0.5*time_interval)
+        pyg.press('tab')
+        time.sleep(0.5*time_interval)
+        pyg.typewrite(str(i))
+        time.sleep(1*time_interval)
+        pyg.press('enter')
+        time.sleep(1*time_interval)
 
-    # 파일저장이 나오는 칸에서 오류가 나옴 '''pyg.typewrite(yyyymm+' '+str(i)+' dusrma') / time.sleep(0.2*time_interval)''' 임시방편으로 clipboard 모듈 사용하여 붙여넣기 수작업을 추가하도록 함
-    pyg.confirm('다음 사업장을 진행하시겠습니까?')
+        #개별사업장 클릭
+        pyg.click(971,335,2) 
+        time.sleep(7*time_interval)
 
-    pyg.click(1440,150)
-    time.sleep(1*time_interval)
+        #보험료결정내역 클릭
+        pyg.click(97,533) 
+        time.sleep(1*time_interval)
+        pyg.click(97,569) 
+        time.sleep(2*time_interval)
+
+        #최신 보험료내역 클릭
+        pyg.click(828,368,2) 
+        time.sleep(2.5*time_interval)
+
+        #통합저장
+        pyg.click(1848,366) 
+        time.sleep(5*time_interval)
+
+        #파일이름 입력
+        pyg.typewrite(str(file_name))
+        time.sleep(1*time_interval)
+        pyg.press('enter')
+        time.sleep(1*time_interval)
+
+        #크롬 하단 다운로드 표시 X 클릭
+        pyg.click(1900,1009) 
+        time.sleep(1*time_interval)
+
+        print(file_name+' 완료')
+
 
 pyg.confirm('프로그램을 모두 완료하엿습니다.')
+
