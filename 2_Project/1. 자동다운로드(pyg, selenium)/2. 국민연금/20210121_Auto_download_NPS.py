@@ -1,7 +1,6 @@
 import pyautogui as pyg
 import pandas as pd
 import time
-import clipboard
 
 # pyg.displayMousePosition()
 yyyymm=pyg.prompt('yyyymm을 입력하세요 : ',title='대상연도(yyyy)와 월(mm)지정')
