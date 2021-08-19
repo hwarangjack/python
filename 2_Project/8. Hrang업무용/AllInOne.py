@@ -413,6 +413,26 @@ def integrating(yyyymm):
 
         # standard.close()
 
+def NHIS_transFileName(yyyymm, baseString):
+    path = os.path.dirname(getValue('path'))
+    companyNumList = targetData()
+    
+    for i in range(len(companyList)):
+
+        if i == 0:
+            beforeName = os.path.join(path, f'{baseString}.xls')
+            afterName = os. path.join(path, f'{yyyymm} {targetDataDict(companyNumList[0])} 건강.xls')
+            if os.path.exists(beforeName):
+                os.rename(beforeName, afterName)
+        else:
+            beforeName = os.path.join(path, f'{baseString} ({i}).xls')
+            afterName = os. path.join(path, f'{yyyymm} {targetDataDict(companyNumList[i])} 건강.xls')
+            if os.path.exists(beforeName):
+                os.rename(beforeName, afterName)
+        
+        print(f'{beforeName}파일을 {afterName}으로 변경했습니다.')
+
+
 
 
 
@@ -423,7 +443,9 @@ this = 202108
 speed = 1
 certifiedIndexNum = 4             # 사무실 2    # 집 4
 
-NHIS_download(this, speed, certifiedIndexNum)
+
+# NHIS_download(this, speed, certifiedIndexNum)
+NHIS_transFileName(this, '보험료_고지(산출)_내역서_20210819')  #건강보험 다른이름 저장이 막혀서 Default File Name으로 저장되어 파일이름 변경하는 프로그램
 # NPS_download(this, speed)
 # transFileName(this)
 # integrating(this)
