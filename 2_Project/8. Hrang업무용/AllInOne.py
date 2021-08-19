@@ -39,14 +39,15 @@ def targetDataDict():
     ]
     name = df['company1'].values.tolist()
     num = targetData()
-    dictDtat = dict(zip(num,name))
-    return dictDtat
+    dictData = dict(zip(num,name))
+    return dictData
 
 def NHIS_download(yyyymm, time_interval, certifiedIndexNum):
     pyg.confirm('프로그램을 실행합니다.')
 
     # 대상 사업장
     a = targetData()
+
 
     # 제외 사업장
     except_list = [
@@ -57,7 +58,7 @@ def NHIS_download(yyyymm, time_interval, certifiedIndexNum):
     driver = webdriver.Chrome()
     driver.get(url)
     driver.maximize_window()
-    time.sleep(20)
+    time.sleep(30)
 
     #로그인
     driver.find_element_by_css_selector('#pre_login > a:nth-child(1) > img').click()
@@ -89,6 +90,9 @@ def NHIS_download(yyyymm, time_interval, certifiedIndexNum):
 
     #  ------------- 사업장 변환하며 시작되는 반복구문
     # locatecenteronscreen 함수 사용하지 않고 곧바로 클릭좌표 지정 >>> 고지서 클릭부터 Chrome 기준
+
+    
+    
     one=[716,200]
     two=[762,204]
     three=[720,310]
@@ -98,6 +102,7 @@ def NHIS_download(yyyymm, time_interval, certifiedIndexNum):
     seven=[604,399]
 
     for i in a:
+        print(f'{i}사업장관리번호를 갖는 사업장{targetDataDict()[i]}을 시작합니다.')
 
         if i in except_list:
             pass
@@ -147,7 +152,7 @@ def NHIS_download(yyyymm, time_interval, certifiedIndexNum):
                 #파일변환 클릭
             
                 pyg.click(four[0],four[1])
-                time.sleep(1*time_interval)
+                time.sleep(2*time_interval)
 
                 #개인별내역보기 클릭
 
@@ -157,7 +162,7 @@ def NHIS_download(yyyymm, time_interval, certifiedIndexNum):
 
                 #다른이름저장
                 filename=yyyymm+" "+str(i)+' rjsrkd'
-                pyg.typewrite(filename)
+                pyg.typewrite('filename')
                 time.sleep(0.5*time_interval)
                 pyg.press('enter')
 
@@ -175,7 +180,7 @@ def NHIS_download(yyyymm, time_interval, certifiedIndexNum):
                 time.sleep(1.5*time_interval)
 
             except:
-                print(str(i)+'사업장 작업을 진행하던 중 오류가 발생했습니다')
+                print(targetDataDict()[i]+' 을 진행하던 중 오류가 발생했습니다')
                 #현재 오류창 닫기
                 pyg.press('enter')
                 pyg.press('esc')
@@ -405,6 +410,7 @@ def integrating(yyyymm):
         worksheet.set_column('O:O', 10, format1)
 
         standard.save()
+
         # standard.close()
 
 
@@ -415,10 +421,10 @@ def integrating(yyyymm):
 
 this = 202108
 speed = 1
-certifiedIndexNum = 2             # 사무실 2
+certifiedIndexNum = 4             # 사무실 2    # 집 4
 
 NHIS_download(this, speed, certifiedIndexNum)
-NPS_download(this, speed)
-transFileName(this)
-integrating(this)
+# NPS_download(this, speed)
+# transFileName(this)
+# integrating(this)
 
