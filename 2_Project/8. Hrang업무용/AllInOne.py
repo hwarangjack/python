@@ -435,14 +435,18 @@ def NHIS_transFileName(yyyymm, baseString):
 
 
 
+'''
 
-# 홈페이지에서 준비된 명단은 company.xls로 변경하여 바탕화면에 둘 것
-# 최종완성된 (종합) 파일은 Python 파일이 위치한 곳에 생성됨
+company.xls : 홈페이지에서 준비된 명단은 company.xls로 변경하여 바탕화면에 둘 것
 
+NHIS_transFileName : 건강보험 Default로 저장된 파일이름 변경을 위해, Default Files은 Company.xls가 위치한 바탕화면에 둘것
+
+최종완성된 (종합) 파일은 Python 파일이 위치한 곳에 생성됨
+
+'''
 this = 202108
 speed = 1
 certifiedIndexNum = 4             # 사무실 2    # 집 4
-
 
 # NHIS_download(this, speed, certifiedIndexNum)
 NHIS_transFileName(this, '보험료_고지(산출)_내역서_20210819')  #건강보험 다른이름 저장이 막혀서 Default File Name으로 저장되어 파일이름 변경하는 프로그램
