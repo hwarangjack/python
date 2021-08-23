@@ -205,6 +205,11 @@ def NPS_download(yyyymm, time_interval):
         61605986810, # 시온관리
     ]
 
+    # 조정계수
+    plusX = 0
+    plusY = 30
+
+
     #------------- 사업장 변환하며 시작되는 반복구문
 
     for i in a:
@@ -220,8 +225,8 @@ def NPS_download(yyyymm, time_interval):
             file_name=f'{yyyymm} {i} dusrma'
 
             #사업장전환 클릭
-            pyg.click(1758,87) 
-            time.sleep(2*time_interval)
+            pyg.click(1758,87+plusY) 
+            time.sleep(2*time_interval) 
 
             #사업장관리번호 입력
             pyg.press('tab')
@@ -236,21 +241,22 @@ def NPS_download(yyyymm, time_interval):
             time.sleep(1*time_interval)
 
             #개별사업장 클릭
-            pyg.click(971,335,2) 
+            pyg.click(971,335
+            ,2) 
             time.sleep(7*time_interval)
 
             #보험료결정내역 클릭
-            pyg.click(97,533) 
+            pyg.click(97,533+plusY) 
             time.sleep(1*time_interval)
-            pyg.click(97,569) 
+            pyg.click(97,569+plusY) 
             time.sleep(2*time_interval)
 
             #최신 보험료내역 클릭
-            pyg.click(828,368,2) 
+            pyg.click(828,368+plusY,2) 
             time.sleep(2.5*time_interval)
 
             #통합저장
-            pyg.click(1848,366) 
+            pyg.click(1848,366+plusY) 
             time.sleep(5*time_interval)
 
             #파일이름 입력
@@ -260,7 +266,7 @@ def NPS_download(yyyymm, time_interval):
             time.sleep(1*time_interval)
 
             #크롬 하단 다운로드 표시 X 클릭
-            pyg.click(1900,1009) 
+            pyg.click(1900,1009+plusY) 
             time.sleep(1*time_interval)
 
             print(file_name+' 완료')
@@ -417,7 +423,7 @@ def NHIS_transFileName(yyyymm, baseString):
     path = os.path.dirname(getValue('path'))
     companyNumList = targetData()
     
-    for i in range(len(companyList)):
+    for i in range(len(companyNumList)):
 
         if i == 0:
             beforeName = os.path.join(path, f'{baseString}.xls')
@@ -435,22 +441,25 @@ def NHIS_transFileName(yyyymm, baseString):
 
 
 
-'''
-
-company.xls : 홈페이지에서 준비된 명단은 company.xls로 변경하여 바탕화면에 둘 것
-
-NHIS_transFileName : 건강보험 Default로 저장된 파일이름 변경을 위해, Default Files은 Company.xls가 위치한 바탕화면에 둘것
-
-최종완성된 (종합) 파일은 Python 파일이 위치한 곳에 생성됨
-
-'''
-this = 202108
-speed = 1
+speed = 1.5
 certifiedIndexNum = 4             # 사무실 2    # 집 4
+this = 202108
+
+
+
+## 1 ## (공통) company.xls : 홈페이지에서 준비된 명단은 company.xls로 변경하여 바탕화면에 둘 것
+## 2 ## (공통) custominfo에서 사무실/집/노트북 별 바탕화면의 경로 재지정 할 것
+
 
 # NHIS_download(this, speed, certifiedIndexNum)
-NHIS_transFileName(this, '보험료_고지(산출)_내역서_20210819')  #건강보험 다른이름 저장이 막혀서 Default File Name으로 저장되어 파일이름 변경하는 프로그램
-# NPS_download(this, speed)
-# transFileName(this)
-# integrating(this)
 
+## 상세 ## NHIS_transFileName : 건강보험 Default로 저장된 파일이름 변경을 위해, Default Files은 Company.xls가 위치한 바탕화면에 둘것
+# NHIS_transFileName(this, '보험료_고지(산출)_내역서_20210819')  #건강보험 다른이름 저장이 막혀서 Default File Name으로 저장되어 파일이름 변경하는 프로그램
+
+# NPS_download(this, speed)
+
+## 상세 ## 바탕화면에 있는 파일들의 이름을 변경함
+# transFileName(this)
+
+## 상세 ## 기초자료는 바탕화면에 있어야 하고, (종합)파일은 현재 작업폴더로 저장됨
+integrating(this)
