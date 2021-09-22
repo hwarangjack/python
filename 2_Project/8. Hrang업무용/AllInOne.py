@@ -1,3 +1,4 @@
+import datetime
 import pyautogui as pyg
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -55,10 +56,11 @@ def NHIS_download(yyyymm, time_interval, certifiedIndexNum):
 
     # 셀레니움
     url = 'https://edi.nhis.or.kr'
-    driver = webdriver.Chrome()
+    # driver = webdriver.Chrome()
+    driver = webdriver.Edge()
     driver.get(url)
     driver.maximize_window()
-    time.sleep(30)
+    time.sleep(20)
 
     #로그인
     driver.find_element_by_css_selector('#pre_login > a:nth-child(1) > img').click()
@@ -150,21 +152,18 @@ def NHIS_download(yyyymm, time_interval, certifiedIndexNum):
                 time.sleep(1.7*time_interval)
 
                 #파일변환 클릭
-            
                 pyg.click(four[0],four[1])
                 time.sleep(2*time_interval)
 
                 #개인별내역보기 클릭
-
                 pyg.click(five[0],five[1])
                 time.sleep(2*time_interval)
 
-
-                #다른이름저장
-                filename=yyyymm+" "+str(i)+' rjsrkd'
-                pyg.typewrite('filename')
-                time.sleep(0.5*time_interval)
-                pyg.press('enter')
+                # #다른이름저장
+                # filename=yyyymm+" "+str(i)+' rjsrkd'
+                # pyg.typewrite('filename')
+                # time.sleep(0.5*time_interval)
+                # pyg.press('enter')
 
                 #현재창 종료
                 pyg.click(six[0],six[1])
@@ -178,6 +177,16 @@ def NHIS_download(yyyymm, time_interval, certifiedIndexNum):
                 #로그인 사업장 돌아가기
                 pyg.click(seven[0],seven[1])
                 time.sleep(1.5*time_interval)
+
+                # 이름변경
+                path = os.path.dirname(getValue('path'))
+                beforeName = os.path.join(path, f'보험료_고지(산출)_내역서_{datetime.datetime.today().strftime("%Y%m%d")}.xls')
+                afterName = os. path.join(path, f'{yyyymm} {targetDataDict()[a[i]]} 건강.xls')
+                if os.path.exists(beforeName):
+                    print('186번재 줄, 파일확인')
+                    os.rename(beforeName, afterName)
+                
+                print(f'{beforeName}파일을 {afterName}으로 변경했습니다.')
 
             except:
                 print(targetDataDict()[i]+' 을 진행하던 중 오류가 발생했습니다')
@@ -421,45 +430,52 @@ def integrating(yyyymm):
 
 def NHIS_transFileName(yyyymm, baseString):
     path = os.path.dirname(getValue('path'))
+    companyNumDict = targetDataDict()
     companyNumList = targetData()
     
     for i in range(len(companyNumList)):
 
         if i == 0:
             beforeName = os.path.join(path, f'{baseString}.xls')
-            afterName = os. path.join(path, f'{yyyymm} {targetDataDict(companyNumList[0])} 건강.xls')
-            if os.path.exists(beforeName):
-                os.rename(beforeName, afterName)
+
         else:
             beforeName = os.path.join(path, f'{baseString} ({i}).xls')
-            afterName = os. path.join(path, f'{yyyymm} {targetDataDict(companyNumList[i])} 건강.xls')
-            if os.path.exists(beforeName):
-                os.rename(beforeName, afterName)
+
+        afterName = os. path.join(path, f'{yyyymm} {targetDataDict()[companyNumList[i]]} 건강.xls')
+        if os.path.exists(beforeName):
+            os.rename(beforeName, afterName)
         
         print(f'{beforeName}파일을 {afterName}으로 변경했습니다.')
 
 
 
 
-speed = 1.5
+speed = 1
 certifiedIndexNum = 4             # 사무실 2    # 집 4
-this = 202108
+this = 202109
 
 
 
 ## 1 ## (공통) company.xls : 홈페이지에서 준비된 명단은 company.xls로 변경하여 바탕화면에 둘 것
 ## 2 ## (공통) custominfo에서 사무실/집/노트북 별 바탕화면의 경로 재지정 할 것
 
+#############건강보험 다운로드##################################
+        # (20210922) Chrome 다운로드안되는 문제 발생 >> Edge로 변경 >> 정상작동
+        ## 상세 ## NHIS_transFileName : 건강보험 Default로 저장된 파일이름 변경을 위해, Default Files은 Company.xls가 위치한 바탕화면에 둘것
+NHIS_download(this, speed, certifiedIndexNum)
+# NHIS_transFileName(this, '보험료_고지(산출)_내역서_20210923')  #건강보험 다른이름 저장이 막혀서 Default File Name으로 저장되어 파일이름 변경하는 프로그램
 
-# NHIS_download(this, speed, certifiedIndexNum)
 
-## 상세 ## NHIS_transFileName : 건강보험 Default로 저장된 파일이름 변경을 위해, Default Files은 Company.xls가 위치한 바탕화면에 둘것
-# NHIS_transFileName(this, '보험료_고지(산출)_내역서_20210819')  #건강보험 다른이름 저장이 막혀서 Default File Name으로 저장되어 파일이름 변경하는 프로그램
-
+#############국민연금 다운로드##################################
 # NPS_download(this, speed)
 
-## 상세 ## 바탕화면에 있는 파일들의 이름을 변경함
+
+
+#############파일이름 변경##################################
+    ## 상세 ## 바탕화면에 있는 파일들의 이름을 변경함
 # transFileName(this)
 
-## 상세 ## 기초자료는 바탕화면에 있어야 하고, (종합)파일은 현재 작업폴더로 저장됨
-integrating(this)
+
+#############파일 통합##################################
+    ## 상세 ## 기초자료는 바탕화면에 있어야 하고, (종합)파일은 현재 작업폴더로 저장됨
+# integrating(this)
