@@ -178,12 +178,11 @@ def NHIS_download(yyyymm, time_interval, certifiedIndexNum):
                 pyg.click(seven[0],seven[1])
                 time.sleep(1.5*time_interval)
 
-                # 이름변경
+                # 이름변경targetDataDict()[i]
                 path = os.path.dirname(getValue('path'))
                 beforeName = os.path.join(path, f'보험료_고지(산출)_내역서_{datetime.datetime.today().strftime("%Y%m%d")}.xls')
-                afterName = os. path.join(path, f'{yyyymm} {targetDataDict()[a[i]]} 건강.xls')
+                afterName = os. path.join(path, f'{yyyymm} {targetDataDict()[i]} 건강.xls')
                 if os.path.exists(beforeName):
-                    print('186번재 줄, 파일확인')
                     os.rename(beforeName, afterName)
                 
                 print(f'{beforeName}파일을 {afterName}으로 변경했습니다.')
