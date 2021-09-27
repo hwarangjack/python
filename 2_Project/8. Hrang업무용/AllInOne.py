@@ -104,7 +104,7 @@ def NHIS_download(yyyymm, time_interval, certifiedIndexNum):
     seven=[604,399]
 
     for i in a:
-        print(f'{i}사업장관리번호를 갖는 사업장{targetDataDict()[i]}을 시작합니다.')
+        print(f'{i}사업장관리번호를 갖는 사업장{i}을 시작합니다.')
 
         if i in except_list:
             pass
@@ -273,10 +273,19 @@ def NPS_download(yyyymm, time_interval):
             time.sleep(1*time_interval)
 
             #크롬 하단 다운로드 표시 X 클릭
-            pyg.click(1900,1009+plusY) 
+            pyg.click(1900,1009) 
             time.sleep(1*time_interval)
 
-            print(file_name+' 완료')
+            # 이름변경targetDataDict()[i]
+            path = os.path.dirname(getValue('path'))
+            beforeName = os.path.join(path, f'{file_name}.xlsx')
+            afterName = os. path.join(path, f'{yyyymm} {targetDataDict()[i]} 연금.xlsx')
+            if os.path.exists(beforeName):
+                os.rename(beforeName, afterName)
+                print(f'{beforeName}파일을 {afterName}으로 변경했습니다.')
+            else:
+                print(beforeName, afterName)
+                print('파일이름을 찾지 못했습니다')
 
 
     pyg.confirm('프로그램을 모두 완료하엿습니다.')
