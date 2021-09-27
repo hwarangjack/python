@@ -358,6 +358,7 @@ def integrating(yyyymm):
 
     # 건강보험료와 연금보험료 파일을 하나로 연결
     for name in object_list:
+        print(name)
         #표준파일 생성
         standard_name=str(yyyymm)+' '+name
         standard=pd.ExcelWriter(standard_name+surfix, engine='xlsxwriter')
@@ -474,7 +475,7 @@ this = 202109
 
 
 #############국민연금 다운로드##################################
-NPS_download(this, speed)
+# NPS_download(this, speed)
 
 
 
@@ -485,4 +486,4 @@ NPS_download(this, speed)
 
 #############파일 통합##################################
     ## 상세 ## 기초자료는 바탕화면에 있어야 하고, (종합)파일은 현재 작업폴더로 저장됨
-# integrating(this)
+integrating(this)
