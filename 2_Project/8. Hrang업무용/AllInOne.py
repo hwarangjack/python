@@ -476,17 +476,18 @@ this = 202110
            # >> 해결방법 : 1. 설정 -> 다운로드 -> 다운로드 폴더 -> 바탕화명으로 변경
            # >> 해결방법 : 2. 홈페이지 주소 자물쇠 클릭 -> 권한 클릭 -> 안전하지 않은 컨텐츠 허용으로 변경
 
-NHIS_download(this, speed, certifiedIndexNum)
+# NHIS_download(this, speed, certifiedIndexNum)
         # NHIS_transFileName(this, '보험료_고지(산출)_내역서_20210923')  #20211020 기준 사용안함. # 건강보험 다른이름 저장이 막혀서 Default File Name으로 저장되어 파일이름 변경하는 프로그램
 
 
 #############국민연금 다운로드##################################
-# NPS_download(this, speed)
+NPS_download(this, speed)
 
 
 
 #############파일이름 변경##################################
     ## 상세 ## 바탕화면에 있는 파일들의 이름을 변경함
+    ## 20211020부터 미사용... 다운로드 자체에서 파일이름 변경까지 진행예정
 # transFileName(this)
 
 
