@@ -60,7 +60,8 @@ def NHIS_download(yyyymm, time_interval, certifiedIndexNum):
     driver = webdriver.Edge()
     driver.get(url)
     driver.maximize_window()
-    time.sleep(20)
+
+    time.sleep(25)
 
     #로그인
     driver.find_element_by_css_selector('#pre_login > a:nth-child(1) > img').click()
@@ -183,9 +184,10 @@ def NHIS_download(yyyymm, time_interval, certifiedIndexNum):
                 beforeName = os.path.join(path, f'보험료_고지(산출)_내역서_{datetime.datetime.today().strftime("%Y%m%d")}.xls')
                 afterName = os. path.join(path, f'{yyyymm} {targetDataDict()[i]} 건강.xls')
                 if os.path.exists(beforeName):
+                    
                     os.rename(beforeName, afterName)
+                    print(f'{beforeName}파일을 {afterName}으로 변경했습니다.')
                 
-                print(f'{beforeName}파일을 {afterName}으로 변경했습니다.')
 
             except:
                 print(targetDataDict()[i]+' 을 진행하던 중 오류가 발생했습니다')
@@ -458,9 +460,9 @@ def NHIS_transFileName(yyyymm, baseString):
 
 
 
-speed = 2
-certifiedIndexNum = 2             # 사무실 2    # 집 4
-this = 202109
+speed = 1
+certifiedIndexNum = 4             # 사무실 2    # 집 4
+this = 202110
 
 
 
@@ -470,8 +472,12 @@ this = 202109
 #############건강보험 다운로드##################################
         # (20210922) Chrome 다운로드안되는 문제 발생 >> Edge로 변경 >> 정상작동
         ## 상세 ## NHIS_transFileName : 건강보험 Default로 저장된 파일이름 변경을 위해, Default Files은 Company.xls가 위치한 바탕화면에 둘것
-# NHIS_download(this, speed, certifiedIndexNum)
-# NHIS_transFileName(this, '보험료_고지(산출)_내역서_20210923')  #건강보험 다른이름 저장이 막혀서 Default File Name으로 저장되어 파일이름 변경하는 프로그램
+        # 20211020) Edge에서도 다운로드 문제 발생함
+           # >> 해결방법 : 1. 설정 -> 다운로드 -> 다운로드 폴더 -> 바탕화명으로 변경
+           # >> 해결방법 : 2. 홈페이지 주소 자물쇠 클릭 -> 권한 클릭 -> 안전하지 않은 컨텐츠 허용으로 변경
+
+NHIS_download(this, speed, certifiedIndexNum)
+        # NHIS_transFileName(this, '보험료_고지(산출)_내역서_20210923')  #건강보험 다른이름 저장이 막혀서 Default File Name으로 저장되어 파일이름 변경하는 프로그램
 
 
 #############국민연금 다운로드##################################
@@ -486,4 +492,4 @@ this = 202109
 
 #############파일 통합##################################
     ## 상세 ## 기초자료는 바탕화면에 있어야 하고, (종합)파일은 현재 작업폴더로 저장됨
-integrating(this)
+# integrating(this)
