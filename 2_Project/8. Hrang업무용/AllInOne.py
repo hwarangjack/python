@@ -217,7 +217,8 @@ def NPS_download(yyyymm, time_interval):
 
     # 조정계수
     plusX = 0
-    plusY = 30
+    plusY = 0
+    # plusY = 30
 
 
     #------------- 사업장 변환하며 시작되는 반복구문
@@ -263,6 +264,10 @@ def NPS_download(yyyymm, time_interval):
             #최신 보험료내역 클릭
             pyg.click(828,368+plusY,2) 
             time.sleep(2.5*time_interval)
+
+            # 직권상실 안내창 뜰 경우 클릭
+            pyg.click(960,630+plusY,2) 
+            time.sleep(1*time_interval)
 
             #통합저장
             pyg.click(1848,366+plusY) 
@@ -461,8 +466,8 @@ def NHIS_transFileName(yyyymm, baseString):
 
 
 speed = 1
-certifiedIndexNum = 4             # 사무실 2    # 집 4
-this = 202110
+certifiedIndexNum = 2             # 사무실 2    # 집 4
+this = 202111
 
 
 
