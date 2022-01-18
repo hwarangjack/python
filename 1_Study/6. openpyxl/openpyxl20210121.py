@@ -8,7 +8,7 @@ import openpyxl
 
 # 대상파일 획정하기
 path='D:\\NaverCloud\\화랑\\☆ 자문'
-how='2021년\s*임금대장\s*.+[.]x+'
+how='2022년\s*임금대장\s*.+[.]x+'
 
 empty_list=[]
 
@@ -29,9 +29,23 @@ checkfile(path,how)
 
 # 대상파일을 현재작업폴더에 복사하기
 for i in empty_list:
-    wb = openpyxl.load_workbook(i)
-    ws = wb['(조건)']
-    ws['p6'] = 0.1152
-    ws['r16'] = 0.1152
-    wb.save(path)
+    print(i)
+    # wb = openpyxl.load_workbook(i)
+    # ws = wb['(조건)']
+    # ws['p5'] = 0.03495
+    # ws['p6'] = 0.1152
+
+    # ws['o17'] = "2022.1~2022.6"
+    # ws['p17'] = 0.045
+    # ws['q17'] = 0.03495
+    # ws['r17'] = 0.1227
+    # ws['s17'] = 0.008
+
+    # ws['o18'] = "2022.7~2022.12"
+    # ws['p18'] = 0.045
+    # ws['q18'] = 0.03495
+    # ws['r18'] = 0.1227
+    # ws['s18'] = 0.009
+    # wb.save(path)
+
     print(i+'파일을 완료했습니다')
