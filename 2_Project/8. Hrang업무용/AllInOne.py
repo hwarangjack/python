@@ -104,8 +104,13 @@ def NHIS_download(yyyymm, time_interval, certifiedIndexNum):
     six=[855,19]
     seven=[604,399]
 
+
+    index = 0
+    success = 0
+    fail = 0
     for i in a:
-        print(f'{i}사업장관리번호를 갖는 사업장{i}을 시작합니다.')
+        
+        print(f'총진행:{index}/{len(a)}  , 성공:{success} , 실패:{fail}')
 
         if i in except_list:
             pass
@@ -222,10 +227,12 @@ def NHIS_download(yyyymm, time_interval, certifiedIndexNum):
                     
                     os.rename(beforeName, afterName)
                     print(f'{beforeName}파일을 {afterName}으로 변경했습니다.')
+                    success += 1
                 
 
             except:
                 print(targetDataDict()[i]+' 을 진행하던 중 오류가 발생했습니다')
+                fail += 1
                 #현재 오류창 닫기
                 pyg.press('enter')
                 pyg.press('esc')
@@ -237,6 +244,8 @@ def NHIS_download(yyyymm, time_interval, certifiedIndexNum):
                 #로그인 사업장으로 돌아가기
                 pyg.click(seven[0],seven[1])
                 time.sleep(1.5*time_interval)
+            
+            index += 1
 
     print('오류사항을 제외하고 작업이 정상적으로 완료되었습니다.')
 
