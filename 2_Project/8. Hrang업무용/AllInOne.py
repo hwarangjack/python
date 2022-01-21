@@ -61,7 +61,7 @@ def NHIS_download(yyyymm, time_interval, certifiedIndexNum):
     driver.get(url)
     driver.maximize_window()
 
-    time.sleep(40)
+    time.sleep(30)
 
     #로그인
     driver.find_element_by_css_selector('#pre_login > a:nth-child(1) > img').click()
@@ -112,7 +112,7 @@ def NHIS_download(yyyymm, time_interval, certifiedIndexNum):
 
         else:
             try:
-                driver.switch_to_window(driver.window_handles[0])
+                driver.switch_to.window(driver.window_handles[0])
                 time.sleep(2*time_interval)
                 
                 #사업장리스트 클릭
@@ -121,7 +121,7 @@ def NHIS_download(yyyymm, time_interval, certifiedIndexNum):
 
 
                 # #사업장명 입력
-                driver.switch_to_window(driver.window_handles[-1])
+                driver.switch_to.window(driver.window_handles[-1])
 
                 driver.find_element_by_css_selector('#srchType').click()
                 driver.find_element_by_css_selector('#srchType').send_keys(Keys.DOWN)
@@ -131,7 +131,7 @@ def NHIS_download(yyyymm, time_interval, certifiedIndexNum):
                 pyg.press('enter')
                 driver.find_element_by_css_selector('#contents > table > tbody > tr:nth-child(2) > td:nth-child(3) > a').click()
             
-                driver.switch_to_window(driver.window_handles[0])
+                driver.switch_to.window(driver.window_handles[0])
                 time.sleep(1*time_interval)
             
                 
@@ -160,12 +160,47 @@ def NHIS_download(yyyymm, time_interval, certifiedIndexNum):
                 pyg.click(five[0],five[1])
                 time.sleep(2*time_interval)
 
+
+
+
+                '''
+                CHROME용
+                '''
+
                 # #다른이름저장
                 # filename=yyyymm+" "+str(i)+' rjsrkd'
                 # pyg.typewrite('filename')
                 # time.sleep(0.5*time_interval)
                 # pyg.press('enter')
 
+                # #현재창 종료
+                # pyg.click(six[0],six[1])
+                # pyg.keyDown('alt')
+                # time.sleep(0.1*time_interval)
+                # pyg.press('f4')
+                # time.sleep(0.1*time_interval)
+                # pyg.keyUp('alt')
+                # time.sleep(0.1*time_interval)
+
+                # #로그인 사업장 돌아가기
+                # pyg.click(seven[0],seven[1])
+                # time.sleep(1.5*time_interval)
+
+                # # 이름변경targetDataDict()[i]
+                # path = os.path.dirname(getValue('path'))
+                # beforeName = os.path.join(path, f'{filename}.xls')
+                # afterName = os. path.join(path, f'{yyyymm} {targetDataDict()[i]} 건강.xls')
+                # if os.path.exists(beforeName):
+                    
+                #     os.rename(beforeName, afterName)
+                #     print(f'{beforeName}파일을 {afterName}으로 변경했습니다.')
+
+
+
+
+                '''
+                EDGE용
+                '''
                 #현재창 종료
                 pyg.click(six[0],six[1])
                 pyg.keyDown('alt')
@@ -467,7 +502,7 @@ def NHIS_transFileName(yyyymm, baseString):
 
 speed = 2
 certifiedIndexNum = 2             # 사무실 2    # 집 4
-this = 202112
+this = 202201
 
 
 
