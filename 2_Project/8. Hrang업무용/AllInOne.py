@@ -28,6 +28,17 @@ def targetData():
     ]
     df['company3'] = df['company3'].apply(lambda x: x.replace('-',''))
     List = df['company3'].values.tolist()
+
+    # 그린푸드 사업자등록번호 != 사업자관리번호 바꾸기
+    targetData = {
+        '92229218731':'13286333830',
+    }
+
+    for i in targetData.keys():
+        indexNum = List.index(i)
+        List[indexNum] = targetData[i]
+
+
     return List
 
 def targetDataDict():
@@ -61,7 +72,7 @@ def NHIS_download(yyyymm, time_interval, certifiedIndexNum):
     driver.get(url)
     driver.maximize_window()
 
-    time.sleep(30)
+    time.sleep(50)
 
     #로그인
     driver.find_element_by_css_selector('#pre_login > a:nth-child(1) > img').click()
@@ -222,7 +233,7 @@ def NHIS_download(yyyymm, time_interval, certifiedIndexNum):
                 # 이름변경targetDataDict()[i]
                 path = os.path.dirname(getValue('path'))
                 beforeName = os.path.join(path, f'보험료_고지(산출)_내역서_{datetime.datetime.today().strftime("%Y%m%d")}.xls')
-                afterName = os. path.join(path, f'{yyyymm} {targetDataDict()[i]} 건강.xls')
+                afterName = os.path.join(path, f'{yyyymm} {targetDataDict()[i]} 건강.xls')
                 if os.path.exists(beforeName):
                     
                     os.rename(beforeName, afterName)
@@ -509,9 +520,9 @@ def NHIS_transFileName(yyyymm, baseString):
 
 
 
-speed = 2
+speed = 1
 certifiedIndexNum = 2             # 사무실 2    # 집 4
-this = 202201
+this = 202206
 
 
 
@@ -525,7 +536,7 @@ this = 202201
            # >> 해결방법 : 1. 설정 -> 다운로드 -> 다운로드 폴더 -> 바탕화명으로 변경
            # >> 해결방법 : 2. 홈페이지 주소 자물쇠 클릭 -> 권한 클릭 -> 안전하지 않은 컨텐츠 허용으로 변경
 
-NHIS_download(this, speed, certifiedIndexNum)
+# NHIS_download(this, speed, certifiedIndexNum)
         # NHIS_transFileName(this, '보험료_고지(산출)_내역서_20210923')  #20211020 기준 사용안함. # 건강보험 다른이름 저장이 막혀서 Default File Name으로 저장되어 파일이름 변경하는 프로그램
 
 
